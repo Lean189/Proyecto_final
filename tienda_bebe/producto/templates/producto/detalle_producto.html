@@ -1,0 +1,20 @@
+{% extends 'producto/index.html' %}
+
+{% block title %}{{ producto.nombre }} - Detalles{% endblock %}
+
+{% block content %}
+<h1>{{ producto.nombre }}</h1>
+
+<div class="product-detail">
+    <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+    <div class="detail-info">
+        <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
+        <p><strong>Precio:</strong> ${{ producto.precio }}</p>
+        <p><strong>Stock disponible:</strong> {{ producto.stock }}</p>
+        <p><strong>Color:</strong> {{ producto.color.all|join:", " }}</p>
+        <p><strong>Talle:</strong> {{ producto.talle.all|join:", " }}</p>
+    </div>
+</div>
+
+<a href="{% url 'producto:lista_productos' %}" class="btn">Volver a la lista</a>
+{% endblock %}

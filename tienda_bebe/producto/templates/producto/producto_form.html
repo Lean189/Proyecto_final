@@ -1,0 +1,59 @@
+{% extends 'producto/index.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Agregar Producto{% endblock %}
+
+{% block content %}
+<h1>Agregar un nuevo producto</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <div class="form-group">
+        <label for="id_nombre">Nombre del Producto</label>
+        {{ form.nombre|add_class:"form-control" }}
+    </div>
+
+    <div class="form-group">
+        <label for="id_descripcion">Descripción</label>
+        {{ form.descripcion|add_class:"form-control" }}
+    </div>
+
+    <div class="form-group">
+        <label for="id_precio">Precio</label>
+        {{ form.precio|add_class:"form-control" }}
+    </div>
+
+    <div class="form-group">
+        <label for="id_stock">Stock</label>
+        {{ form.stock|add_class:"form-control" }}
+    </div>
+
+    <div class="form-group">
+        <label for="id_disponible">Disponible</label>
+        {{ form.disponible|add_class:"form-check-input" }}
+    </div>
+
+    <div class="form-group">
+        <label for="id_imagen">Imagen</label>
+        {{ form.imagen|add_class:"form-control-file" }}
+    </div>
+
+    <div class="form-group">
+        <label for="id_categoria">Categoría</label>
+        {{ form.categoria|add_class:"form-control" }}
+    </div>
+
+    <div class="form-group">
+        <label for="id_talle">Talle</label>
+        {{ form.talle|add_class:"form-check" }}
+    </div>
+
+    <div class="form-group">
+        <label for="id_color">Color</label>
+        {{ form.color|add_class:"form-check" }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>
+{% endblock %}

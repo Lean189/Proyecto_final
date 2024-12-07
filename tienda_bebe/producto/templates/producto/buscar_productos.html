@@ -1,0 +1,22 @@
+{% extends 'producto/index.html' %}
+
+{% block title %}Buscar Productos{% endblock %}
+
+{% block content %}
+    <h1>Buscar Productos</h1>
+    <form method="get" action="{% url 'listado_productos' %}">
+        <input type="text" name="q" placeholder="Buscar producto..." class="form-control">
+        <button type="submit" class="btn">Buscar</button>
+    </form>
+
+    {% if productos %}
+        <h2>Resultados de búsqueda:</h2>
+        <ul>
+            {% for producto in productos %}
+                <li><a href="{% url 'detalle_producto' producto.pk %}">{{ producto.nombre }}</a></li>
+            {% empty %}
+                <li>No se encontraron productos.</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

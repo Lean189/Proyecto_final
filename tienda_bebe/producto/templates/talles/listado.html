@@ -1,0 +1,26 @@
+{% extends 'producto/index.html' %}
+{% block content %}
+<h1>Listado de Talles</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for talles in talles %}
+        <tr>
+            <td>{{ talles.nombre }}</td>
+            <td>
+                <a href="{% url 'talles_update' talles.id %}">Editar</a> |
+                <a href="{% url 'talles_delete' talles.id %}">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+        
+    </tbody>
+</table>
+<a href="{% url 'talle_create' %}" class="btn btn-primary">Nuevo talle</a>
+{% endblock %}

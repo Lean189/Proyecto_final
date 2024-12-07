@@ -1,0 +1,82 @@
+{% extends 'producto/index.html' %}
+
+{% block title %}Listado de Productos{% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4">Listado de Productos</h1>
+
+<!-- Formulario de búsqueda -->
+<form method="get" class="mb-4">
+    <div class="input-group">
+        <input type="text" name="search" class="form-control" placeholder="Buscar productos..." value="{{ request.GET.buscar }}">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">Buscar</button>
+        </div>
+    </div>
+</form>
+
+<!-- Botón para agregar producto, visible solo si el usuario tiene permiso para agregar productos -->
+{% if perms.producto.add_producto %}
+<div class="mb-4 text-right">
+    <a href="{% url 'crear_producto' %}" class="btn btn-success">Agregar Producto</a>
+</div>
+{% endif %}
+
+<!-- Contenedor de tarjetas para productos -->
+<div class="row">
+    {% for producto in productos %}
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <!-- Imagen del producto -->
+                <div class="text-center">
+                    {% if producto.imagen %}
+                    <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="img-fluid" style="max-height: 200px; object-fit: cover;">
+                    {% else %}
+                    <span class="text-muted">Sin imagen</span>
+                    {% endif %}
+                </div>
+
+                <!-- Nombre y Precio -->
+                <h5 class="card-title mt-3">{{ producto.nombre }}</h5>
+                <p class="card-text"><strong>Precio:</strong> ${{ producto.precio }}</p>
+
+                <!-- Stock y Categoría -->
+                <p class="card-text"><strong>Stock:</strong> {{ producto.stock }}</p>
+                <p class="card-text"><strong>Categoría:</strong> {{ producto.categoria.nombre }}</p>
+
+                <!-- Colores -->
+                <p><strong>Colores:</strong>
+                    {% for color in producto.color.all %}
+                    <span class="badge" style="background-color: {{ color.codigo_color }};">
+                        {{ color.nombre }}
+                    </span>
+                    {% endfor %}
+                </p>
+
+                <!-- Talles -->
+                <p><strong>Talles:</strong>
+                    {% for talle in producto.talle.all %}
+                    <span class="badge badge-secondary">{{ talle.nombre }}</span>
+                    {% endfor %}
+                </p>
+
+                <!-- Acciones -->
+                <div class="d-flex justify-content-between">
+                    {% if perms.producto.change_producto %}
+                    <a href="{% url 'editar_producto' producto.id %}" class="btn btn-warning btn-sm">Editar</a>
+                    {% endif %}
+                    {% if perms.producto.delete_producto %}
+                    <a href="{% url 'eliminar_producto' producto.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12 text-center">
+        <p>No hay productos disponibles. <a href="{% url 'crear_producto' %}" class="btn btn-primary">Agregar Producto</a></p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

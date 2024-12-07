@@ -1,0 +1,29 @@
+{% extends 'producto/index.html' %}
+
+{% block title %}Perfil{% endblock %}
+
+{% block content %}
+  <h2>Editar perfil</h2>
+  
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <!-- Mostrar errores de formulario si los hay -->
+    {% if form.errors %}
+      <div class="alert alert-danger">
+        <ul>
+          {% for field in form %}
+            {% for error in field.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+    
+    <!-- Renderiza el formulario -->
+    {{ form.as_p }}
+    
+    <button type="submit">Guardar cambios</button>
+  </form>
+{% endblock %}

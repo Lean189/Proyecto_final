@@ -1,0 +1,51 @@
+{% extends 'producto/index.html' %}
+
+{% block title %}Listado de Categorías{% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4">Listado de Categorías</h1>
+
+<!-- Botón para agregar nueva categoría (solo si el usuario tiene permiso) -->
+{% if perms.producto.add_categoria %}
+<div class="mb-4 text-right">
+    <a href="{% url 'crear_categoria' %}" class="btn btn-success">Agregar Categoría</a>
+</div>
+{% endif %}
+
+<!-- Contenedor de tarjetas para categorías -->
+<div class="row">
+    {% for categoria in categorias %}
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm border-light">
+            <div class="card-body">
+                <!-- Imagen de la categoría (si tienes una imagen representativa) -->
+                {% if categoria.imagen %}
+                <img src="{{ categoria.imagen.url }}" alt="{{ categoria.nombre }}" class="card-img-top mb-3">
+                {% endif %}
+                
+                <!-- Nombre y Descripción de la Categoría -->
+                <h5 class="card-title">{{ categoria.nombre }}</h5>
+                <p class="card-text">{{ categoria.descripcion }}</p>
+
+                <!-- Acciones -->
+                <div class="d-flex justify-content-between">
+                    {% if perms.producto.change_categoria %}
+                    <a href="{% url 'editar_categoria' categoria.id %}" class="btn btn-warning btn-sm">Editar</a>
+                    {% endif %}
+                    {% if perms.producto.delete_categoria %}
+                    <a href="{% url 'eliminar_categoria' categoria.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12 text-center">
+        <p>No hay categorías disponibles.</p>
+        {% if perms.producto.add_categoria %}
+        <a href="{% url 'crear_categoria' %}" class="btn btn-primary">Agregar Categoría</a>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

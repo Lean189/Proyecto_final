@@ -1,0 +1,10 @@
+{% extends 'producto/index.html' %}
+{% block content %}
+<h1>{% if object %}Editar Categoría{% else %}Nueva Categoría{% endif %}</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Guardar</button>
+</form>
+<a href="{% url 'listado_categorias' %}" class="btn btn-secondary">Cancelar</a>
+{% endblock %}

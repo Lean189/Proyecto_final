@@ -1,0 +1,10 @@
+{% extends 'producto/index.html' %}
+{% block content %}
+<h1>Confirmar Eliminación</h1>
+<p>¿Está seguro de que desea eliminar el talle "{{ object.nombre }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a href="{% url 'listado_talles' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

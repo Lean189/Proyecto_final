@@ -1,0 +1,26 @@
+{% extends 'producto/index.html' %}
+{% block content %}
+<h1>Listado de Colores</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for colores in colores %}
+        <tr>
+            <td>{{ colores.nombre }}</td>
+            <td>
+                <a href="{% url 'colores_update' colores.id %}">Editar</a> |
+                <a href="{% url 'colores_delete' colores.id %}">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+        
+    </tbody>
+</table>
+<a href="{% url 'colores_create' %}" class="btn btn-primary">Nuevo Color</a>
+{% endblock %}

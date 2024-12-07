@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Tienda de Ropa para Bebés{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="{% static 'media/logo.png' %}" alt="Logo Tienda Bebé">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'index' %}">Inicio</a></li>
+                    <li><a href="{% url 'listado_productos' %}">Productos</a></li>
+                    <li><a href="{% url 'listado_categorias' %}">Categorías</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'profile' %}">{{ user.username }}</a></li>
+                        <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+                        <li><a href="{% url 'registro' %}">Registrar</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+    {% block content %} 
+    {% endblock %}
+    
+    <main>
+        <div class="container">
+            <section class="intro">
+                <h1>Bienvenidos a nuestra tienda de bebé</h1>
+                <p>¡Tu lugar ideal para encontrar lo mejor para tu pequeño! Descubre una amplia selección de productos de alta calidad, cuidadosamente elegidos para brindarle comodidad, seguridad y estilo a tu bebé. Desde ropa adorable hasta accesorios esenciales, cada artículo está pensado para acompañar el crecimiento de tu pequeño con amor y cuidado. ¡Haz de cada momento un recuerdo especial con nosotros!</p>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Tienda de Ropa para Bebés | Todos los derechos reservados.</p>
+            <p>Dirección: Calle Ficticia, Ciudad, País</p>
+        </div>
+    </footer>
+
+</body>
+</html>

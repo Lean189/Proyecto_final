@@ -21,7 +21,16 @@
                     <li><a href="{% url 'listado_productos' %}">Productos</a></li>
                     <li><a href="{% url 'listado_categorias' %}">Categorías</a></li>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'profile' %}">{{ user.username }}</a></li>
+                        <li>
+                            <a href="{% url 'profile' %}" class="user-profile">
+                                {% if user.avatar %}
+                                    <img src="{{ user.avatar.url }}" alt="{{ user.username }}" class="avatar">
+                                {% else %}
+                                    <img src="{% static 'media/default-avatar.png' %}" alt="Avatar por defecto" class="avatar">
+                                {% endif %}
+                                <span class="header-link">{{ user.username }}</span>
+                            </a>
+                        </li>
                         <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
                     {% else %}
                         <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
@@ -40,7 +49,6 @@
                 <h1>Bienvenidos a nuestra tienda de bebé</h1>
                 <p>¡Tu lugar ideal para encontrar lo mejor para tu pequeño! Descubre una amplia selección de productos de alta calidad, cuidadosamente elegidos para brindarle comodidad, seguridad y estilo a tu bebé. Desde ropa adorable hasta accesorios esenciales, cada artículo está pensado para acompañar el crecimiento de tu pequeño con amor y cuidado. ¡Haz de cada momento un recuerdo especial con nosotros!</p>
             </section>
-
         </div>
     </main>
 

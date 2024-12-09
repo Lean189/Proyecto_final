@@ -73,6 +73,7 @@ header .logo img {
 header nav ul {
     list-style: none;
     display: flex;
+    align-items: center;
 }
 
 header nav ul li {
@@ -85,10 +86,32 @@ header nav ul li a {
     font-weight: bold;
     font-size: 1.1rem;
     transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
 }
 
 header nav ul li a:hover {
     color: var(--accent-color); /* Rosa */
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+/* Estilos para el avatar del usuario */
+header nav ul li a img.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px; /* Espacio entre el avatar y el texto */
+}
+
+.username {
+    font-size: 0.9rem; /* Tamaño más pequeño para el nombre */
+    color: #333; /* Color neutro */
+    font-weight: 500; /* Peso medio */
 }
 
 /* Contenedor principal */

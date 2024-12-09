@@ -44,15 +44,15 @@ def profile(request):
         form = ProfileForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
-            return redirect('profile')  # Redirige después de guardar el perfil
+            return redirect('profile') 
     else:
         form = ProfileForm(instance=user)
 
     return render(request, 'registro/profile.html', {'form': form})
 
-@permission_required('usuarios.cam_scrum', raise_exception=True)
-def vista_scrum(req):
-    return render(req, 'scrum.html')
+#@permission_required('usuarios.cam_scrum', raise_exception=True)
+#def vista_scrum(req):
+#    return render(req, 'scrum.html')
 
 @login_required
 def edit_profile(request):
@@ -60,7 +60,7 @@ def edit_profile(request):
         form = ProfileForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('profile')  # Redirige a la vista del perfil (puedes crear una vista para mostrar los datos)
+            return redirect('profile') 
     else:
         form = ProfileForm(instance=request.user)
     
@@ -83,6 +83,6 @@ def profile_view(request):
 def is_scrum_user(user):
     return user.groups.filter(name='Scrum Users').exists()
 
-@user_passes_test(is_scrum_user)
-def vista_scrum(req):
-    return render(req, 'scrum.html')
+#@user_passes_test(is_scrum_user)
+#def vista_scrum(req):
+#    return render(req, 'scrum.html')

@@ -6,7 +6,7 @@ from .models import Producto
 
 @receiver(post_migrate)
 def asignar_permisos_producto(sender, **kwargs):
-    # Crea los permisos asociados al modelo Producto
+    
     content_type = ContentType.objects.get_for_model(Producto)
     
     # Crear permisos si no existen
@@ -26,13 +26,13 @@ def asignar_permisos_producto(sender, **kwargs):
         content_type=content_type
     )
     
-    # Crear grupo 'Scrum' si no existe
+    
     group, created = Group.objects.get_or_create(name='Scrum')
     
-    # Asignar permisos al grupo Scrum
+    
     scrum_permissions = Permission.objects.filter(content_type=content_type)
     group.permissions.set(scrum_permissions)
     group.save()
 
-    # Puedes agregar más grupos y permisos según lo necesites
+
 

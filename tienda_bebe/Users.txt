@@ -1,0 +1,12 @@
+superuser:
+
+User:admin
+Pass:1234lean
+
+user comun sin crud
+
+User:lean
+Pass:123456Leo
+
+User:pepe
+Pass:123456Leo

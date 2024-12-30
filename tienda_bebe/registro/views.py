@@ -81,7 +81,7 @@ def profile_view(request):
 
 
 def is_scrum_user(user):
-    return user.groups.filter(name='Scrum Users').exists()
+    return user.groups.filter(name='crud user').exists()
 
 #@user_passes_test(is_scrum_user)
 #def vista_scrum(req):
